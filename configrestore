@@ -23,3 +23,26 @@ ssh-keygen -t ed25519 -C swaroopanand695@gmail.com
 
 # to get ssh key for pasting in github
 cat ~/.ssh/id_ed25519.pub
+
+
+# GIT BARE REPO MIGRATION  
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME' #will be used everywhere
+
+config config --local status.showUntrackedFiles no  # running this for not showing untracked files
+
+echo ".cfg" >> .gitignore
+
+git config --global core.excludesFile '~/.gitignore' #for defining global gitignore
+
+git clone --bare git@github.com:swaroopanand10/.cfg.git $HOME/.cfg
+
+config checkout # will show an error because of prexisting files
+
+# The below command is useful for creating backup of files present in home directory so either use this command or either remove those files
+mkdir -p .config-backup && \
+config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | \
+xargs -I{} mv {} .config-backup/{}
+
+config checkout   # this time it should work properly
+
+config config --local status.showUntrackedFiles no   # again running this command to not show untracked files
