@@ -1,1 +1,25 @@
 # command to backup old file and checkout new files from bare git repository
+
+git config --global user.name "swaroop"
+git config --global user.email "swaroopanand695@gmail.com"
+git config --global init.defaultBranch main
+git config --global color.ui auto
+
+
+
+# to verify the changes
+git config --get user.name
+git config --get user.email
+
+
+# ssh key location
+ls ~/.ssh/id_ed25519.pub
+
+# ssh key genration
+ssh-keygen -t ed25519 -C swaroopanand695@gmail.com
+#  When it prompts you for a location to save the generated key, just push Enter.
+#  Next, it will ask you for a password; enter one if you wish, but it’s not required.
+
+
+# to get ssh key for pasting in github
+cat ~/.ssh/id_ed25519.pub
